@@ -1,0 +1,8 @@
+from itertools import combinations
+from itertools import permutations
+
+def solution(nums):
+     if(len(list(set(nums)))>int(len(nums)/2)):
+         return int(len(nums)/2)
+     else : 
+         return len(list(set(nums)))
