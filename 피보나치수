@@ -1,0 +1,8 @@
+def solution(n):
+    answer = 1
+    dummy = [0,1]
+    count = 1
+    for i in range(2,n+1):
+        dummy.append(dummy[i-1]+dummy[i-2])
+        count+=1
+    return dummy[count]%1234567
