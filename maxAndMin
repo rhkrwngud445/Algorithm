@@ -1,0 +1,6 @@
+def solution(s):
+    num = s.split(sep=' ')
+    results = list(map(int, num))
+    answer = ''
+    answer = str(min(results)) + ' ' + str(max(results)) 
+    return answer
