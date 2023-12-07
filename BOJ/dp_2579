@@ -1,0 +1,25 @@
+import java.lang.Integer.max
+import java.util.Scanner
+
+fun main() {
+    with(Scanner(System.`in`)) {
+        val count = nextLine().toInt()
+        val stairs = mutableListOf(0)
+        repeat(count) {
+            stairs.add(nextLine().toInt())
+        }
+        val dp = Array(count + 1) {
+            0
+        }
+
+        for (i in dp.indices) {
+            when (i) {
+                0 -> dp[0] = 0
+                1 -> dp[1] = stairs[1]
+                2 -> dp[2] = stairs[1] + stairs[2]
+                else -> dp[i] = max(dp[i - 2] + stairs[i], stairs[i] + stairs[i - 1] + dp[i - 3])
+            }
+        }
+        print(dp.last())
+    }
+}
