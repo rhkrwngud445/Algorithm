@@ -1,0 +1,21 @@
+import java.math.BigInteger
+import java.util.Scanner
+
+fun main() {
+    with(Scanner(System.`in`)) {
+        val count = nextLong()
+        1 % 2
+        println(combinationCount(9 + count, count))
+    }
+}
+
+fun combinationCount(n: Long, r: Long): Long {
+    if (r == 0L || n == r) return 1
+
+    var result = BigInteger("1")
+    for (i in 1..r) {
+        result *= BigInteger((n - r + i).toString())
+        result /= BigInteger(i.toString())
+    }
+    return (result.rem(BigInteger("10007"))).toLong()
+}
