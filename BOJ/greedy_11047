@@ -1,0 +1,26 @@
+import java.util.Scanner
+
+fun main() {
+    with(Scanner(System.`in`)) {
+        var (count, value) = nextLine().split(" ").map {
+            it.toInt()
+        }
+        val coinArray = Array(count) {
+            0
+        }
+        var result = 0
+        repeat(count) {
+            coinArray[it] = nextInt()
+        }
+
+        coinArray.sortDescending()
+
+        coinArray.forEach {
+            if (value / it >= 1) {
+                result += (value / it)
+                value %= it
+            }
+        }
+        println(result)
+    }
+}
