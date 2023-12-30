@@ -1,0 +1,57 @@
+import java.util.Scanner
+
+fun main() {
+    with(Scanner(System.`in`)) {
+        val count = nextLine().toInt()
+        val numberArray = Array(10) {
+            it
+        }
+
+        val list = arrayListOf<Long>()
+
+        for (i in 1..10) {
+            val combination = combination(numberArray, 10, i)
+            if (i == 1) {
+                list.addAll(
+                    ArrayList(
+                        combination.map {
+                            it[0].toLong()
+                        },
+                    ),
+                )
+            } else {
+                list.addAll(
+                    combination.filter {
+                        it.reversed().joinToString("").toLongOrNull() != null
+                    }.map {
+                        it.reversed().joinToString("").toLong()
+                    }.sorted(),
+                )
+            }
+        }
+
+        list.getOrNull(count)?.let { println(it) } ?: print(-1)
+    }
+}
+
+private fun <T> combination(array: Array<T>, n: Int, r: Int): List<List<T>> {
+    val list = mutableListOf<List<T>>()
+
+    fun recursionCombination(
+        depth: Int = 0,
+        index: Int = 0,
+        resultArray: Array<T> = array.sliceArray(0 until r),
+    ) {
+        if (depth == r) {
+            list.add(resultArray.toList()); return
+        }
+
+        for (arrayIndex in index until n) {
+            resultArray[depth] = array[arrayIndex]
+            recursionCombination(depth + 1, arrayIndex + 1, resultArray)
+        }
+    }
+
+    recursionCombination()
+    return list
+}
