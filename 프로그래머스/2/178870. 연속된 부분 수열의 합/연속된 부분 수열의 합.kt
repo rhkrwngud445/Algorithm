@@ -1,21 +1,18 @@
 class Solution {
     fun solution(sequence: IntArray, k: Int): IntArray {
-        var l = 0
-        var r = 0
-        var sum = sequence[l]
-        val temporary = mutableListOf<IntArray>()
-        while (l < sequence.size) {
-            if (sum < k) {
-                if (r == sequence.size - 1) break
-                sum += sequence[++r]
-            } else {
-                if (sum == k) {
-                    temporary.add(intArrayOf(l, r))
+    // 1순위 짧은 수열
+    // 2순위 앞에 있는 수열
+    for (size in sequence.indices) {
+        for (i in sequence.indices) {
+            if (size + i > sequence.size - 1) {
+                continue
+            }
+            if (sequence.slice(i..i + size).sum() == k) {
+                    return intArrayOf(i, i + size)
                 }
-                sum -= sequence[l++]
+            //sequence의 index부터 size 만큼 끊어서 이 배열의 합이 k이면 return result로
             }
         }
-        val minSize = temporary.minOf { it[1] - it[0] }
-        return temporary.first { it[1] - it[0] == minSize }
+    return intArrayOf()
     }
 }
